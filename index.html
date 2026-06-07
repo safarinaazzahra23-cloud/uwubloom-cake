@@ -228,7 +228,7 @@ button:hover{
 
 <div class="card">
 <h3>📅Tanggal Ambil</h3>
-<input type="text" id="Tanggal">
+<input type="date" id="tanggal">
 </div>
 
 <div class="card">
@@ -272,22 +272,47 @@ button:hover{
 </div>
 
 <div class="card">
-    <h3>💵 Metode Pembayaran</h3>
+<h3>💵 Metode Pembayaran</h3>
 
-    <label class="radio-item">
-        <input type="radio" name="pembayaran" value="Transfer Bank">
-        🏦 Transfer Bank
-    </label>
+<label class="radio-item">
+    <input type="radio"
+           name="pembayaran"
+           value="Transfer Bank"
+           onclick="showPaymentInfo()">
+    🏦 Transfer Bank
+</label>
 
-    <label class="radio-item">
-        <input type="radio" name="pembayaran" value="Transfer E-Wallet">
-        📱 E-Wallet (Dana / Shopeepay)
-    </label>
+<label class="radio-item">
+    <input type="radio"
+           name="pembayaran"
+           value="Dana / ShopeePay"
+           onclick="showPaymentInfo()">
+    📱 Dana / ShopeePay
+</label>
 
-    <label class="radio-item">
-        <input type="radio" name="pembayaran" value="Bayar Saat Ambil">
-        💰 Bayar Saat Ambil
-    </label>
+<label class="radio-item">
+    <input type="radio"
+           name="pembayaran"
+           value="Bayar Saat Ambil"
+           onclick="showPaymentInfo()">
+    💰 Bayar Saat Ambil
+</label>
+
+</div>
+
+<div class="card" id="infoPembayaran" style="display:none;">
+
+    <h3>💳 Informasi Pembayaran</h3>
+
+    <div id="detailPembayaran"></div>
+
+    <button type="button"
+            id="copyBtn"
+            onclick="copyPaymentInfo()"
+            style="margin-top:10px;background:#6a1b9a;">
+        📋 Salin Nomor Pembayaran
+    </button>
+
 </div>
 
 <button onclick="pesanWA()">
@@ -297,7 +322,82 @@ button:hover{
 </div>
 
 <script>
+let paymentText = "";
 
+function showPaymentInfo(){
+
+    let pembayaran =
+    document.querySelector(
+    'input[name="pembayaran"]:checked'
+    )?.value;
+
+    let box =
+    document.getElementById("infoPembayaran");
+
+    let detail =
+    document.getElementById("detailPembayaran");
+
+    box.style.display = "block";
+
+    if(pembayaran === "Transfer Bank"){
+
+        paymentText =
+`🏦 BANK BNI
+1855772079
+a.n IKHTIARA SAFARINA AZZAHRA`;
+
+        detail.innerHTML =
+`
+<div style="line-height:1.8">
+<b>🏦 Transfer Bank</b><br>
+BANK BNI<br>
+1855772079<br>
+a.n IKHTIARA SAFARINA AZZAHRA
+</div>
+`;
+
+    }
+
+    else if(pembayaran === "Dana / ShopeePay"){
+
+        paymentText =
+`📱 DANA / SHOPEEPAY
+085664541343
+a.n IKHTIARA SAFARINA AZZAHRA`;
+
+        detail.innerHTML =
+`
+<div style="line-height:1.8">
+<b>📱 Dana / ShopeePay</b><br>
+085664541343<br>
+a.n IKHTIARA SAFARINA AZZAHRA
+</div>
+`;
+
+    }
+
+    else{
+
+        paymentText =
+"Bayar saat pengambilan atau COD";
+
+        detail.innerHTML =
+`
+<div style="line-height:1.8">
+💰 Pembayaran dilakukan saat
+pengambilan atau COD.
+</div>
+`;
+
+    }
+
+}
+function copyPaymentInfo(){
+
+    navigator.clipboard.writeText(paymentText);
+
+    alert("✅ Informasi pembayaran berhasil disalin");
+}
 function pesanWA(){
 
 let tanggal = document.getElementById("tanggal").value;
@@ -330,11 +430,15 @@ Saya ingin membuat cake custom.
 💌 Tulisan : ${tulisan}
 📝 Catatan : ${catatan}
 
-🚚 Metode : ${metode}
+🚚 Metode Pengambilan : ${metode}
 📅 Tanggal : ${tanggal}
 🕒 Jam : ${jam}
-💵 Pembayaran : ${pembayaran}
 📍 Alamat : ${alamat}
+💵 Pembayaran : ${pembayaran} 
+
+📋 Detail Pembayaran :
+${paymentText}
+
 
 📸 Referensi Cake
 
