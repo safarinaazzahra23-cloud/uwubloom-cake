@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make Your Cake - Uwubloom</title>
+
+<style>
+    
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#f5e6ff,#ffe6f7);
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#8a2be2;
+}
+
+.card{
+    margin-bottom:20px;
+    padding:15px;
+    border-radius:15px;
+    background:#faf5ff;
+}
+
+label{
+    display:block;
+    margin:8px 0;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:10px;
+    border:2px solid #ddd;
+    border-radius:10px;
+    margin-top:5px;
+}
+
+button{
+    width:100%;
+    background:#8a2be2;
+    color:white;
+    border:none;
+    padding: 15px;
+    border-radius:15px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+.radio-item{
+    display:flex;
+    align-items:center;
+    gap:30px;
+    margin:15px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.radio-item input{
+    width:20px;
+    height:20px;
+    margin:0;
+}
+
+.check-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:white;
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:12px;
+    border:2px solid #eee;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:15px;
+}
+
+.check-item:hover{
+    border-color:#b366ff;
+    transform:translateY(-2px);
+}
+
+.check-item input{
+    width:15px;
+    height:15px;
+    margin:0;
+    accent-color:#8a2be2;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>🎂 Make Your Cake 💜</h1>
+<p align="center">
+✨ Custom Cake by Uwubloom ✨
+</p>
+
+<div class="card">
+<h3>👤 Nama Pemesan</h3>
+<input type="text" id="nama">
+</div>
+
+<div class="card">
+<h3>📱 Nomor WhatsApp</h3>
+<input type="text" id="wa">
+</div>
+
+<div class="card">
+    <h3>📏 Pilih Ukuran Cake</h3>
+
+    <label class="radio-item">
+        <input type="radio" name="ukuran" value="Bento Cake">
+        🎂 Bento Cake
+    </label>
+
+    <label class="radio-item">
+        <input type="radio" name="ukuran" value="15 cm">
+        🍰 15 cm
+    </label>
+
+    <label class="radio-item">
+        <input type="radio" name="ukuran" value="18 cm">
+        🎉 18 cm
+    </label>
+
+    <label class="radio-item">
+        <input type="radio" name="ukuran" value="20 cm">
+        🎊 20 cm
+    </label>
+</div>
+
+<div class="card">
+<h3>🍫 Pilih Rasa</h3>
+
+<select id="rasa">
+<option>Coklat</option>
+<option>Vanilla</option>
+<option>Strawberry</option>
+<option>Matcha</option>
+<option>Tiramisu</option>
+<option>Red Velvet</option>
+</select>
+
+</div>
+
+<div class="card">
+<h3>🎨 Warna Cake</h3>
+
+<select id="warna">
+<option>💗 Pink</option>
+<option>💜 Ungu</option>
+<option>💙 Biru</option>
+<option>🤍 Putih</option>
+<option>💛 Kuning</option>
+<option>🌈 Custom</option>
+</select>
+
+</div>
+
+<div class="card">
+<h3>🍓 Pilih Topping</h3>
+
+    <label class="check-item">
+        <input type="checkbox" value="Oreo" class="topping">
+        🍪 Oreo
+    </label>
+
+    <label class="check-item">
+        <input type="checkbox" value="Strawberry" class="topping">
+        🍓 Strawberry
+    </label>
+
+    <label class="check-item">
+        <input type="checkbox" value="Coklat" class="topping">
+        🍫 Coklat
+    </label>
+
+    <label class="check-item">
+        <input type="checkbox" value="Sprinkle" class="topping">
+        ✨ Sprinkle
+    </label>
+
+    <label class="check-item">
+        <input type="checkbox" value="Bunga" class="topping">
+        🌸 Bunga
+    </label>
+
+    <label class="check-item">
+        <input type="checkbox" value="Lilin" class="topping">
+        🕯️ Lilin
+    </label>
+</div>
+</div>
+
+<div class="card">
+<h3>💌 Tulisan di Cake</h3>
+
+<textarea id="tulisan" rows="3"></textarea>
+
+</div>
+
+<div class="card">
+<h3>📝 Catatan Tambahan</h3>
+
+<textarea id="catatan" rows="4"></textarea>
+
+</div>
+
+<button onclick="pesanWA()">
+📲 Pesan Sekarang via WhatsApp
+</button>
+
+</div>
+
+<script>
+
+function pesanWA(){
+
+let nama = document.getElementById("nama").value;
+let rasa = document.getElementById("rasa").value;
+let warna = document.getElementById("warna").value;
+let tulisan = document.getElementById("tulisan").value;
+let catatan = document.getElementById("catatan").value;
+
+let ukuran = document.querySelector('input[name="ukuran"]:checked')?.value || "-";
+
+let topping = [];
+
+document.querySelectorAll(".topping:checked")
+.forEach(item => topping.push(item.value));
+
+let pesan =
+`Halo Uwubloom 🌸
+
+Saya ingin membuat cake custom.
+
+👤 Nama : ${nama}
+
+📏 Ukuran : ${ukuran}
+
+🍫 Rasa : ${rasa}
+
+🎨 Warna : ${warna}
+
+🍓 Topping : ${topping.join(", ")}
+
+💌 Tulisan :
+${tulisan}
+
+📝 Catatan :
+${catatan}`;
+
+let nomor = "085704224184"; // Ganti nomor WA Anda
+
+window.open(
+`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`
+);
+
+}
+
+</script>
+
+</body>
+</html>
