@@ -150,7 +150,7 @@ button:hover{
 </div>
 
 <div class="card">
-<h3>🍫 Pilih Rasa</h3>
+<h3>🧁 Pilih Butter Cream</h3>
 
 <select id="rasa">
 <option>Coklat</option>
@@ -226,6 +226,70 @@ button:hover{
 
 </div>
 
+<div class="card">
+<h3>📅Tanggal Ambil</h3>
+<input type="text" id="Tanggal">
+</div>
+
+<div class="card">
+    <h3>🚚 Metode Pengambilan</h3>
+
+    <label class="radio-item">
+        <input type="radio" name="metode" value="COD">
+        🚗 COD
+    </label>
+
+    <label class="radio-item">
+        <input type="radio" name="metode" value="Ambil Sendiri">
+        🏠 Ambil Sendiri
+    </label>
+</div>
+
+<div class="card">
+    <h3>🕒 Jam Ambil / COD</h3>
+    <select id="jam">
+        <option value="">Pilih Jam</option>
+        <option>08:00</option>
+        <option>09:00</option>
+        <option>10:00</option>
+        <option>11:00</option>
+        <option>12:00</option>
+        <option>13:00</option>
+        <option>14:00</option>
+        <option>15:00</option>
+        <option>16:00</option>
+        <option>17:00</option>
+        <option>18:00</option>
+        <option>19:00</option>
+        <option>20:00</option>
+    </select>
+</div>
+
+<div class="card">
+    <h3>📍 Alamat COD (Jika COD)</h3>
+    <textarea id="alamat" rows="3"
+    placeholder="Masukkan alamat lengkap"></textarea>
+</div>
+
+<div class="card">
+    <h3>💵 Metode Pembayaran</h3>
+
+    <label class="radio-item">
+        <input type="radio" name="pembayaran" value="Transfer Bank">
+        🏦 Transfer Bank
+    </label>
+
+    <label class="radio-item">
+        <input type="radio" name="pembayaran" value="Transfer E-Wallet">
+        📱 E-Wallet (Dana / Shopeepay)
+    </label>
+
+    <label class="radio-item">
+        <input type="radio" name="pembayaran" value="Bayar Saat Ambil">
+        💰 Bayar Saat Ambil
+    </label>
+</div>
+
 <button onclick="pesanWA()">
 📲 Pesan Sekarang via WhatsApp
 </button>
@@ -236,6 +300,9 @@ button:hover{
 
 function pesanWA(){
 
+let tanggal = document.getElementById("tanggal").value;
+let jam = document.getElementById("jam").value;
+let alamat = document.getElementById("alamat").value;
 let nama = document.getElementById("nama").value;
 let rasa = document.getElementById("rasa").value;
 let warna = document.getElementById("warna").value;
@@ -243,7 +310,8 @@ let tulisan = document.getElementById("tulisan").value;
 let catatan = document.getElementById("catatan").value;
 
 let ukuran = document.querySelector('input[name="ukuran"]:checked')?.value || "-";
-
+let pembayaran = document.querySelector('input[name="pembayaran"]:checked')?.value || "-";
+let metode = document.querySelector('input[name="metode"]:checked')?.value || "-";
 let topping = [];
 
 document.querySelectorAll(".topping:checked")
@@ -255,20 +323,24 @@ let pesan =
 Saya ingin membuat cake custom.
 
 👤 Nama : ${nama}
-
 📏 Ukuran : ${ukuran}
-
 🍫 Rasa : ${rasa}
-
 🎨 Warna : ${warna}
-
 🍓 Topping : ${topping.join(", ")}
+💌 Tulisan : ${tulisan}
+📝 Catatan : ${catatan}
 
-💌 Tulisan :
-${tulisan}
+🚚 Metode : ${metode}
+📅 Tanggal : ${tanggal}
+🕒 Jam : ${jam}
+💵 Pembayaran : ${pembayaran}
+📍 Alamat : ${alamat}
 
-📝 Catatan :
-${catatan}`;
+📸 Referensi Cake
+
+"Punya contoh desain yang disukai? Kirim foto referensi setelah klik tombol WhatsApp agar kami dapat membuat cake sesuai keinginan kamu💜"
+
+`;
 
 let nomor = "6285704224184"; // Ganti nomor WA Anda
 
